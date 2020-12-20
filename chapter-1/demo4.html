@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+    <li v-for="(item,index) in items">
+        {{item.message}}--{{index}}
+    </li>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#app",
+        // Model 数据
+        data:{
+            items:[
+                {message:'A'},
+                {message: 'B'}
+            ]
+        }
+    });
+</script>
+
+</body>
+</html>
