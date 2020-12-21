@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+    <button v-on:click="sayHi">Click Me</button>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#app",
+        // Model 数据
+        data:{
+            message:'Hello'
+        },
+        // 方法
+        methods:{
+            // v-on事件绑定
+            sayHi:function () {
+                // this就是本地的 vm
+                alert(this.message);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
