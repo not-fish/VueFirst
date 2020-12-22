@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app1">
+    输入的文本:<input type="text" v-model="message">{{message}}
+</div>
+
+<div id="app2">
+    <input type="radio" name="sex" value="男" v-model="message"> 男
+    <input type="radio" name="sex" value="女" v-model="message"> 女
+    <p>
+        选中了：{{message}}
+    </p>
+</div>
+
+<div id="app3">
+    <select v-model="message">
+        <option disabled value="">---请选择---</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <p>
+        选中了：{{message}}
+    </p>
+</div>
+<script>
+    var vm1 = new Vue({
+        el:"#app1",
+        // Model 数据
+        data:{
+            message:'hello,vue!'
+        }
+    });
+
+    var vm2 = new Vue({
+        el:"#app2",
+        // Model 数据
+        data:{
+            message:''
+        }
+    });
+
+    var vm3 = new Vue({
+        el:"#app3",
+        // Model 数据
+        data:{
+            message:''
+        }
+    });
+</script>
+
+</body>
+</html>
