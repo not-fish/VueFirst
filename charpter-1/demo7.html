@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--父组件-->
+<div id="app">
+<!--    子组件-->
+<!--    组件（自定义标签）-->
+<!--    要把 val 传给 component1 ，可以理解为 item 是实参，val是形参-->
+    <component1 v-for="item in items" v-bind:val="item"></component1>
+</div>
+
+<script>
+    // 注册组件（自定义一个Vue组件 component1）
+    Vue.component("component1",{
+        // 接收父组件的数据 val
+        props:['val'],
+        template: '<li>{{val}}</li>'
+    });
+
+    var vm = new Vue({
+        el:"#app",
+        // Model 数据
+        data:{
+            message:'hello,vue!',
+            items:["A","B","C"]
+        }
+    });
+
+</script>
+
+</body>
+</html>
