@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+    <div>{{info.name}}</div>
+
+    <a v-bind:href="info.url">点我</a>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#app",
+        // Model 数据
+        data(){
+            return{
+                info:{
+                    name:null,
+                    address:{
+                        country:null,
+                        city:null,
+                        street:null
+                    },
+                    url:null
+                }
+            }
+        },
+        mounted(){ //钩子函数(进入页面内容全部渲染完成后自动引函数，即进入页面后就调用某些函数，完成初始化，链式，ES6新特性)
+            axios.get('../data.json').then(response=>(this.info = response.data));
+        }
+    });
+</script>
+
+</body>
+</html>
