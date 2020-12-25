@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+<!--    调用方法-->
+    <p>{{currentTime1()}}</p>
+<!--    调用属性-->
+    <p>{{currentTime2}}</p>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#app",
+        // Model 数据
+        data:{
+            message:'hello,vue!'
+        },
+        methods:{
+            currentTime1:function () {
+                return Date.now();  //返回一个时间戳
+            }
+        },
+        //计算属性（是属性，带缓存的，如果计算属性内的数据发生变化时，再被调用时就会重新计算，而不是返回缓存值）
+        computed:{
+            currentTime2:function () {
+                return Date.now();  //返回一个时间戳
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
