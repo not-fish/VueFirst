@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+    <todo>
+        <todo-title slot="todo-title" :title="title"></todo-title>
+        <todo-items slot="todo-items" v-for="item in todoItems" :item="item"></todo-items>
+    </todo>
+</div>
+
+<script>
+
+    Vue.component("todo",{
+       template: '<div>\
+                       <slot name="todo-title"></slot>\
+                       <ul>\
+                          <slot name="todo-items"></slot>\
+                       </ul>\
+                  </div>'
+    });
+
+    Vue.component("todo-title",{
+        props:['title'],
+        template: '<div>{{title}}</div>'
+    });
+
+    Vue.component("todo-items",{
+        props:['item'],
+        template: '<li>{{item}}</li>'
+    });
+
+
+    var vm = new Vue({
+        el:"#app",
+        // Model 数据
+        data:{
+            title:'列表',
+            todoItems:['A','B','C']
+        }
+    });
+</script>
+
+</body>
+</html>
