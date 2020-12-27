@@ -13,14 +13,14 @@
 <div id="app">
 <!--    子组件-->
 <!--    组件（自定义标签）-->
-<!--    要把 val 传给 component1 ，可以理解为 item 是实参，val是形参-->
+<!--    v-bind给组件绑定参数，要把 val 传给 component1 ，可以理解为 item 是实参，val是形参-->
     <component1 v-for="item in items" v-bind:val="item"></component1>
 </div>
 
 <script>
     // 注册组件（自定义一个Vue组件 component1）
     Vue.component("component1",{
-        // 接收父组件的数据 val
+        // 参数传递（接收组件的数据 val）
         props:['val'],
         template: '<li>{{val}}</li>'
     });

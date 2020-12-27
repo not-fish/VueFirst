@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<!--【组件通信】 整个流程-->
+<!--【组件】：删除事件myRemove() 调用this.$emit('remove')  ===>  【视图】：bind自定义事件="remove"绑定removeItems()   <===  【Vue实例】removeItems()   -->
+
+<!--View层 模板-->
+<div id="app">
+    <todo>
+        <todo-title slot="todo-title" :title="title"></todo-title>
+<!--        v-bind的简写就是一个":"-->
+        <todo-items slot="todo-items" v-for="(item,index) in todoItems" :item="item" v-bind:index="index" v-on:remove="removeItems(index)"></todo-items>
+        <!--                    v-on事件绑定，这里把 实例vm的方法removeItems绑定到组件todo-items的remove方法上-->
+    </todo>
+</div>
+
+<script>
+
+    Vue.component("todo",{
+        template: '<div>\
+                       <slot name="todo-title"></slot>\
+                       <ul>\
+                          <slot name="todo-items"></slot>\
+                       </ul>\
+                  </div>'
+    });
+
+    Vue.component("todo-title",{
+        props:['title'],
+        template: '<div>{{title}}</div>'
+    });
+
+    Vue.component("todo-items",{
+        // 参数传递
+        props:['item','index'],
+        // v-on 简写"@"
+        template: '<li>{{index}}--{{item}} <button @click="myRemove">删除</button></li>',
+        methods:{
+            myRemove:function () {
+                console.log('删除');
+                this.$emit('remove',this.index);
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:"#app",
+        // Model 数据
+        data:{
+            title:'列表',
+            todoItems:['A','B','C']
+        },
+        methods:{
+            removeItems:function (index) {
+                console.log('删除了'+this.todoItems[index]);
+                // 移除数组元素
+                this.todoItems.splice(index,1);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
