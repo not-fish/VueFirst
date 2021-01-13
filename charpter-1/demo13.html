@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的生命周期</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#app",  //给Vue实例定义一个作用范围，一般作用在div标签上
+        // Model 数据
+        data:{
+            message:'hello,vue!',
+        },
+            //【生命周期】的第一个函数
+            //该函数在执行时，vue实例仅仅完成了自身事件的绑定和生命周期函数的初始化
+            //Vue实例中还没有data、el、methods等属性
+        beforeCreate(){
+
+        },
+            //【生命周期】的第二个函数
+            //该函数在执行时，vue实例已经初始化data属性，和methods的方法
+        created(){
+            console.log('建议数据初始化在这里操作');
+        },
+            //【生命周期】的第三个函数
+            //该函数在执行时，vue实例将el中指定的作用范围作为模板编译
+        beforeMount(){
+
+        },
+            //【生命周期】的第四个函数
+            //该函数在执行时，已经将数据渲染到界面并且已经更新界面(挂载完毕)
+        mounted(){
+
+        },
+            //【生命周期】的第五个函数
+            //该函数会在vue实例中data发生变化的时候执行（虚拟DOM重新渲染）
+        beforeUpdate(){
+
+        },
+            //【生命周期】的第六个函数
+            //页面中的数据已经随vue实例中data变化而完成更新（虚拟DOM重新渲染完毕，并且应用更新）
+        updated(){
+
+        },
+            //【生命周期】的第七个函数
+            //vue实例准备被销毁（解除绑定，销毁组件、事件监听器）
+        beforeDestroy(){
+
+        },
+            //【生命周期】的第八个函数
+            //销毁完毕
+        destroyed(){
+
+        }
+    });
+</script>
+
+</body>
+</html>

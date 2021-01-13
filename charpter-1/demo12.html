@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+    <span v-text="message"></span>
+</div>
+
+<script>
+
+    function http1(){
+        //get请求
+        axios.get("url").then(function (response) {
+            console.log(response.data);  //响应的内容
+        }).catch(function (err) {
+            console.log(err);    //捕获异常
+        });
+    }
+
+    function http2(){
+        //post请求
+        axios.post("url",{
+            // 传一个对象
+            name:'jack',
+            age:24,
+            class:18
+        }).then(function (response) {
+            console.log(response.data);  //响应的内容
+        }).catch(function (err) {
+            console.log(err);    //捕获异常
+        });
+    }
+
+
+    //并发执行（发送一组请求，然后将这组函数的响应结果汇总处理）
+    axios.all([http1(),http2]).then(
+        axios.spread(function (resp1,resp2) {
+            console.log(resp1.data);
+            console.log(resp2.data);
+        })
+    );
+
+
+
+    var vm = new Vue({
+        el:"#app",  //给Vue实例定义一个作用范围，一般作用在div标签上
+        // Model 数据
+        data:{
+            message:'hello,vue!'
+        }
+    });
+</script>
+
+</body>
+</html>

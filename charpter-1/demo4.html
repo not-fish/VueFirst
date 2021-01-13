@@ -11,9 +11,15 @@
 
 <!--View层 模板-->
 <div id="app">
+<!--    遍历数组-->
     <li v-for="(item,index) in items">
-        {{item.message}}--{{index}}
+        {{item}}--{{index}}
     </li>
+<!--    遍历对象-->
+    <li v-for="(u,key,index) in user">
+        {{key}}--{{u}}--{{index}}
+    </li>
+
 </div>
 
 <script>
@@ -22,9 +28,12 @@
         // Model 数据
         data:{
             items:[
-                {message:'A'},
-                {message: 'B'}
-            ]
+                "A", "B","C"
+            ],
+            user:{
+                name:'Jack',
+                age:24
+            }
         }
     });
 </script>

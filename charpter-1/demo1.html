@@ -11,15 +11,22 @@
 
 <!--View层 模板-->
 <div id="app">
+<!--    插值表达式-->
     {{message}}
+<!--    v-text-->
+    <span v-text="message"></span>
+<!--    两者区别：v-text会将标签内原有数据覆盖，而插值表达式不会，但插值表达式会在网络较差的情况下出现明显的闪烁-->
+    <span v-html="temp"></span>
+<!--    v-html会将数据中的html标签先解析再渲染到指定标签的内部-->
 </div>
 
 <script>
     var vm = new Vue({
-        el:"#app",
+        el:"#app",  //给Vue实例定义一个作用范围，一般作用在div标签上
         // Model 数据
         data:{
-            message:'hello,vue!'
+            message:'hello,vue!',
+            temp:'<a href="">链接</a>'
         }
     });
 </script>
