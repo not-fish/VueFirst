@@ -13,17 +13,56 @@
 <div id="app">
 <!--    子组件-->
 <!--    组件（自定义标签）-->
-<!--    v-bind给组件绑定参数，要把 val 传给 component1 ，可以理解为 item 是实参，val是形参-->
-    <component1 v-for="item in items" v-bind:val="item"></component1>
+<!--    组件可以在页面传递数据到组件对象中，通过props   -->
+<!--    直接建立属性，则传的是静态资源（单项流动），例如 name，使用 v-bind:，则传递的是动态资源，例如 val，这里的item是从Vue实例的data中获取的-->
+    <component1 v-for="item in items" user-name="jack" v-bind:val="item"></component1>
+
+<!--   【注意】组件的页面与对象的交互，在属性命名上是有规则的：
+              如果在对象里的命名为驼峰式，则在页面标签里，属性要以 - 隔开，随后的字符要改为小写
+              例如：myLogin  ==>  my-login  -->
+
+    <component2></component2>
+
+    <component3></component3>
+
+<!--    方式3：用template标签-->
+    <template id="mycomponent3">
+        <li>哈哈哈</li>
+    </template>
+
+<!--    除了【属性传递】，还可以【方法传递】-->
+    <component4 @fun="vueFunction"></component4>
+
+
 </div>
 
 <script>
-    // 注册组件（自定义一个Vue组件 component1）
+    // 方式1：注册全局组件（自定义一个Vue组件 component1）
     Vue.component("component1",{
         // 参数传递（接收组件的数据 val）
-        props:['val'],
-        template: '<li>{{val}}</li>'
+        props:['val','userName'],
+        template: '<li>{{userName}}---{{val}}</li>'
     });
+
+    Vue.component("component4",{
+        // 参数传递（接收组件的数据 val）
+        template: '<button @click="change">点击</button>',
+        methods:{
+            change(){
+                //调用传递下来的方法
+                this.$emit('fun');
+            }
+        }
+    });
+
+    // 方式2：局部组件
+    let mycomponent2 = {
+        template: '<li>嘻嘻嘻</li>'
+    };
+
+    let mycomponent3 = {
+        template: '#mycomponent3'
+    };
 
     var vm = new Vue({
         el:"#app",
@@ -31,6 +70,16 @@
         data:{
             message:'hello,vue!',
             items:["A","B","C"]
+        },
+        components:{
+            //注册局部组件
+            component2:mycomponent2,
+            component3:mycomponent3,
+        },
+        methods:{
+            vueFunction(){
+                alert('vue实例的方法');
+            }
         }
     });
 
