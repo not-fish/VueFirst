@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+<!--    跳转-->
+    <a href="#/login">登录</a>
+    <a href="#/register">注册</a>
+
+<!--    或者-->
+    <router-link to="/login">登录</router-link>
+    <router-link to="/register" class="button">注册</router-link>
+
+<!--    路由传递参数-->
+    <router-link to="/index?id=21&name=jack">主页</router-link>
+
+<!--    内容展示-->
+    <router-view></router-view>
+
+</div>
+
+<script>
+
+    //声明组件模板
+    let login = {
+        template:'<h1>登录</h1>',
+    };
+
+    let register = {
+        template:'<h1>注册</h1>'
+    };
+
+    let index = {
+        template:'<h1>主页</h1>',
+        data(){
+            return{}
+        },
+        methods:{},
+        created(){
+            console.log(this.$route.query.id+"================="+this.$route.query.name);
+        }
+    };
+
+    //创建路由对象
+    const router = new VueRouter({
+        //【注意】这里是routes
+        routes:[
+            {path:'/',redirect:'/login'}, //默认路由
+            {path: '/login',component: login},
+            {path: '/register',component: register},
+            {path: '/index',component:index},
+        ]
+    });
+
+    var vm = new Vue({
+        el:"#app",  //给Vue实例定义一个作用范围，一般作用在div标签上
+        // Model 数据
+        data:{
+            message:'hello,vue!',
+        },
+        //注册路由
+        router:router,
+    });
+</script>
+
+</body>
+</html>

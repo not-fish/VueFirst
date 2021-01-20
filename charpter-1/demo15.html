@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+</head>
+<body>
+
+<!--View层 模板-->
+<div id="app">
+
+    <router-link to="/product">商品管理</router-link>
+
+    <!--    内容展示-->
+    <router-view></router-view>
+
+</div>
+
+<template id="product">
+    <div>
+        <h1>商品管理</h1>
+
+        <router-link to="/product/add">商品添加</router-link>
+        <router-link to="/product/edit">商品编辑</router-link>
+
+        <!--    内容展示-->
+        <router-view></router-view>
+
+    </div>
+</template>
+
+<script>
+
+    //声明组件模板
+    let product = {
+        template: '#product'
+    };
+
+    let add = {
+        template:'<h1>添加</h1>'
+    };
+
+    let edit = {
+        template:'<h1>编辑</h1>',
+    };
+
+    //创建路由对象
+    const router = new VueRouter({
+        //【注意】这里是routes
+        routes:[
+            {path:'/',redirect:'/product'}, //默认路由
+            {
+                path: '/product',
+                component: product,
+                children:[
+                    {path:'add',component:add},
+                    {path:'edit',component:edit}
+                ]
+            },
+        ]
+    });
+
+    var vm = new Vue({
+        el:"#app",  //给Vue实例定义一个作用范围，一般作用在div标签上
+        // Model 数据
+        data:{
+            message:'hello,vue!',
+        },
+        //注册路由
+        router:router,
+    });
+</script>
+
+</body>
+</html>
